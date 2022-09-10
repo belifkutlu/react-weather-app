@@ -1,7 +1,9 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 
-import SunIcon from "./components/icons/SunIcon";
+import WeatherCard from "./components/WeatherCard";
+import LocationCard from "./components/LocationCard";
+
+import "./App.css";
 
 const cities = [
   {
@@ -687,7 +689,6 @@ function App() {
       <div className="header">
         <div className="weather-app">
           <h1>Weather App</h1>
-
           <select
             name="select-city"
             id="city"
@@ -711,38 +712,16 @@ function App() {
           </select>
         </div>
         {weather && !loading ? (
-          <div className="location">
-            <h2>{selectedCity.name}</h2>
-            <div>
-              <img src={weather.current.condition.icon} alt="" />
-            </div>
-            <p>{weather.current.condition.text}:</p>
-            <p>{weather.current.temp_c}ºC</p>
-          </div>
+          <LocationCard weather={weather} selectedCity={selectedCity} />
         ) : (
           <p style={{ textAlign: "center" }}>Loading..</p>
         )}
       </div>
       <div className="weather-list">
         {weather &&
-          weather.forecast.forecastday.map((item, index) => {
-            return (
-              <div
-                key={item.date}
-                className={`weather-card ${index === 0 ? "select" : ""} `}
-              >
-                <p> {item.date}</p>
-                <p>{weekDays[index]}</p>
-                <img src={item.day.condition.icon} alt="" />
-                <p style={{ fontSize: "10px", textAlign: "center" }}>
-                  {item.day.condition.text}
-                </p>
-
-                <span> {item.day.mintemp_c}ºC </span>
-                <span>{item.day.maxtemp_c}ºC</span>
-              </div>
-            );
-          })}
+          weather.forecast.forecastday.map((item, index) => (
+            <WeatherCard item={item} index={index} weekDays={weekDays} />
+          ))}
       </div>
     </div>
   );
