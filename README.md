@@ -1,4 +1,13 @@
-# Getting Started with Create React App
+# DEMO URL
+
+[DEMO URL](https://belifkutlu-react-weather-app.netlify.app/)
+
+## Desktop Screenshots
+
+![desktop 1](https://github.com/belifkutlu/react-weather-app/blob/master/belifkutlu-react-weather-app.netlify.app_.png) 
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
