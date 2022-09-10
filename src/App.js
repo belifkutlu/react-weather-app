@@ -665,22 +665,40 @@ const weekDays = [
   "Cumartesi",
   "Pazar",
 ];
+
 function App() {
-  const [selectedCity, setSelectedCity] = useState(cities[0]);
+  const [selectedCity, setSelectedCity] = useState(null);
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=b1764cc3b8294c958eb130127221009&q=${selectedCity.name}&days=7&lang=tr`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setWeather(data);
-        setLoading(false);
-      });
+    if (selectedCity) {
+      setLoading(true);
+      fetch(
+        `https://api.weatherapi.com/v1/forecast.json?key=b1764cc3b8294c958eb130127221009&q=${selectedCity.name}&days=7&lang=tr`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setWeather(data);
+          setLoading(false);
+        });
+    }
   }, [selectedCity]);
+
+  useEffect(() => {
+    fetch("https://ipinfo.io?token=bbb4564d81f70d")
+      .then((res) => res.json())
+      .then((res) => {
+        const city = cities.find((item) => {
+          return item.name.toLocaleLowerCase().includes(res.city.toLowerCase());
+        });
+        setSelectedCity(city);
+      });
+  }, []);
+
+  if (!selectedCity) {
+    return null;
+  }
 
   return (
     <div className="container">
@@ -718,7 +736,12 @@ function App() {
       <div className="weather-list">
         {weather &&
           weather.forecast.forecastday.map((item, index) => (
-            <WeatherCard item={item} index={index} weekDays={weekDays} />
+            <WeatherCard
+              item={item}
+              index={index}
+              weekDays={weekDays}
+              key={item.date}
+            />
           ))}
       </div>
     </div>
