@@ -673,7 +673,7 @@ function App() {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=b1764cc3b8294c958eb130127221009&q=${selectedCity.name}&days=7&lang=tr`
+      `https://api.weatherapi.com/v1/forecast.json?key=b1764cc3b8294c958eb130127221009&q=${selectedCity.name}&days=7&lang=tr`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -681,8 +681,6 @@ function App() {
         setLoading(false);
       });
   }, [selectedCity]);
-
-  console.log(weather);
 
   return (
     <div className="container">
