@@ -654,20 +654,34 @@ const cities = [
   },
 ];
 
+const weekDays = [
+  "Pazartesi",
+  "Sali",
+  "Carsamba",
+  "Persembe",
+  "Cuma",
+  "Cumartesi",
+  "Pazar",
+];
 function App() {
   const [selectedCity, setSelectedCity] = useState(cities[0]);
   const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(
-      `https://api.openweathermap.org/data/3.0/onecall?APPID=f3b45caf73652544e1a4f209611fbba8&units=metric&lat=${selectedCity.latitude}&lon=${selectedCity.longitude}`
+      `http://api.weatherapi.com/v1/forecast.json?key=b1764cc3b8294c958eb130127221009&q=${selectedCity.name}&days=7&lang=tr`
     )
       .then((res) => res.json())
       .then((data) => {
         setWeather(data);
+        setLoading(false);
       });
   }, [selectedCity]);
+
   console.log(weather);
+
   return (
     <div className="container">
       <div className="header">
@@ -696,48 +710,39 @@ function App() {
             })}
           </select>
         </div>
-        <div className="location">
-          <h2>Istanbul</h2>
-          <SunIcon />
-          <p>27ºC</p>
-        </div>
+        {weather && !loading ? (
+          <div className="location">
+            <h2>{selectedCity.name}</h2>
+            <div>
+              <img src={weather.current.condition.icon} alt="" />
+            </div>
+            <p>{weather.current.condition.text}:</p>
+            <p>{weather.current.temp_c}ºC</p>
+          </div>
+        ) : (
+          <p style={{ textAlign: "center" }}>Loading..</p>
+        )}
       </div>
       <div className="weather-list">
-        <div className="weather-card">
-          <p>Pazartesi</p>
-          <SunIcon />
-          <p>25ºC - 27ºC</p>
-        </div>
-        <div className="weather-card">
-          <p>Pazartesi</p>
-          <SunIcon />
-          <p>25ºC - 27ºC</p>
-        </div>
-        <div className="weather-card">
-          <p>Pazartesi</p>
-          <SunIcon />
-          <p>25ºC - 27ºC</p>
-        </div>
-        <div className="weather-card">
-          <p>Pazartesi</p>
-          <SunIcon />
-          <p>25ºC - 27ºC</p>
-        </div>
-        <div className="weather-card">
-          <p>pazartesi</p>
-          <SunIcon />
-          <p>25ºC - 27ºC</p>
-        </div>
-        <div className="weather-card">
-          <p>Pazartesi</p>
-          <SunIcon />
-          <p>25ºC - 27ºC</p>
-        </div>
-        <div className="weather-card">
-          <p>Pazartesi</p>
-          <SunIcon />
-          <p>25ºC - 27ºC</p>
-        </div>
+        {weather &&
+          weather.forecast.forecastday.map((item, index) => {
+            return (
+              <div
+                key={item.date}
+                className={`weather-card ${index === 0 ? "select" : ""} `}
+              >
+                <p> {item.date}</p>
+                <p>{weekDays[index]}</p>
+                <img src={item.day.condition.icon} alt="" />
+                <p style={{ fontSize: "10px", textAlign: "center" }}>
+                  {item.day.condition.text}
+                </p>
+
+                <span> {item.day.mintemp_c}ºC </span>
+                <span>{item.day.maxtemp_c}ºC</span>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

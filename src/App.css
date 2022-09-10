@@ -5,7 +5,7 @@
 }
 
 .header {
-  margin: 50px 0;
+  margin: 30px 0;
 }
 
 .weather-app {
@@ -18,7 +18,7 @@
 .weather-app h1 {
   text-align: center;
   margin-bottom: 40px;
-  color: rgb(234, 176, 2);
+  color: rgb(255, 206, 59);
   font-size: 40px;
 }
 
@@ -37,6 +37,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid #efefef;
+  box-shadow: 6px 6px 14px #ddd, -6px -6px 14px #fff;
+  border-radius: 25px;
+  width: 130px;
+  margin: 0 auto;
+  padding: 15px 10px;
 }
 
 .weather-list {
@@ -48,6 +54,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  margin-bottom: 50px;
 }
 
 .weather-card {
@@ -59,4 +66,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.select {
+  border: 2px solid rgb(255, 163, 101);
+  background-color: rgb(255, 236, 180);
 }
