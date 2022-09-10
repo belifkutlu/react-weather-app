@@ -1,38 +1,62 @@
-.App {
+.container {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  margin: 50px 0;
+}
+
+.weather-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.weather-app h1 {
   text-align: center;
+  margin-bottom: 40px;
+  color: rgb(234, 176, 2);
+  font-size: 40px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.weather-app select {
+  border: none;
+  background-color: rgb(255, 237, 183);
+  border-radius: 5px;
+  padding: 10px;
+  width: 40%;
+  font-size: medium;
+  font-weight: 500;
+  color: rgb(91, 91, 91);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.location {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.weather-list {
+  border: none;
+  border-radius: 5px;
+  background-color: #efefef;
+  box-shadow: 6px 6px 14px #ddd, -6px -6px 14px #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.weather-card {
+  border: 1px solid rgb(255, 210, 76);
+  border-radius: 5px;
+  width: 10%;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
