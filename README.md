@@ -4,7 +4,7 @@
 
 ## Desktop Screenshots
 
-![desktop 1](https://github.com/belifkutlu/react-asian-kitchen-menu/blob/master/public/react-asian-kitchen-menu.netlify.app_.png) 
+![desktop 1](https://github.com/belifkutlu/react-weather-app/blob/master/belifkutlu-react-weather-app.netlify.app_.png) 
 
 
 ## Getting Started with Create React App
